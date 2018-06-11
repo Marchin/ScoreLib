@@ -19,44 +19,22 @@ namespace scoreSystem {
 		return m_size;
 	}
 
-	bool ScoreSystem::AddScore(const std::string& name, const int score) {
-		if (score < m_scoreArray[m_size]._value) {
+	bool ScoreSystem::AddScore(const char* name, const int score) {
+		if (score < m_scoreArray[m_size - 1]._value) {
 			return false;
-		} else if (score > m_scoreArray[0]._value) {
-			
-		}
-		int i = m_size - 1;
-		while ((score > m_scoreArray[i]._value) && i > 0) {
-			i--;
-		}
-		if (score > m_scoreArray[i]._value) {
-			int j = i;
-			while (j < (m_size - 1)) {
-				m_scoreArray[j + 1]._name
-					= m_scoreArray[j]._name;
-				m_scoreArray[j + 1]._value
-					= m_scoreArray[j]._value;
-				j++;
-			}
-			m_scoreArray[i]._name = name;
-			m_scoreArray[i]._value = score;
-			return true;
-		} else if (score < m_scoreArray[i]._value
-			&& (i < m_size - 1)) {
-
-			int j = i + 1;
-			while (j < (m_size - 1)) {
-				m_scoreArray[j + 1]._name
-					= m_scoreArray[j]._name;
-				m_scoreArray[j + 1]._value
-					= m_scoreArray[j]._value;
-				j++;
-			}
-			m_scoreArray[i]._name = name;
-			m_scoreArray[i]._value = score;
+		} else if (score >= m_scoreArray[0]._value) {
+			ShiftDownSystem(0, 1);
+			strcpy_s(m_scoreArray[0]._name, sizeof(Score::_name), name);
+			m_scoreArray[0]._value = score;
 			return true;
 		} else {
-			return false;
+			int iter = m_size - 1;
+			while ((score >= m_scoreArray[iter]._value) && (iter > 0)) {
+				iter--;
+			}
+			ShiftDownSystem(iter, 1);
+			strcpy_s(m_scoreArray[iter]._name, sizeof(Score::_name), name);
+			m_scoreArray[iter]._value = score;
 		}
 	}
 
@@ -88,7 +66,7 @@ namespace scoreSystem {
 			m_scoreArray[index] = m_scoreArray[index + 1];
 			index++;
 		}
-		m_scoreArray[index - 1]._name = "(Empty)";
+		strcpy_s(m_scoreArray[index - 1]._name, sizeof(Score::_name),"(Empty)");
 		m_scoreArray[index - 1]._value = 0;
 	}
 
@@ -96,7 +74,7 @@ namespace scoreSystem {
 		if (index > (m_size - 1)) {
 			throw std::out_of_range("Index out of range");
 		}
-		for (int i = m_size - 1; i >= (index - amount); i--) {
+		for (int i = m_size - 1; i >= (index + amount); i--) {
 			if ((i - amount) < index) {
 				m_scoreArray[i] = Score();
 			} else {

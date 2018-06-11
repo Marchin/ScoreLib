@@ -5,7 +5,7 @@
 namespace scoreSystem {
 
 	struct Score {
-		std::string _name = "(Empty)";
+		char _name[15] = "(Empty)";
 		int _value = 0;
 	};
 
@@ -14,7 +14,7 @@ namespace scoreSystem {
 		ScoreSystem(const unsigned int size);
 		~ScoreSystem();
 		unsigned int GetSize() const;
-		bool AddScore(const std::string& name,const int score);
+		bool AddScore(const char* name,const int score);
 		Score GetScore(unsigned int index) const;
 		void PrintScore(const std::string& name);
 		void PrintScoreSystem();
