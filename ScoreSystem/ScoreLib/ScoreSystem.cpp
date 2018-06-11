@@ -29,7 +29,7 @@ namespace scoreSystem {
 			return true;
 		} else {
 			int iter = m_size - 1;
-			while ((score >= m_scoreArray[iter]._value) && (iter > 0)) {
+			while ((score >= m_scoreArray[iter - 1]._value) && (iter > 1)) {
 				iter--;
 			}
 			ShiftDownSystem(iter, 1);

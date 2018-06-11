@@ -18,7 +18,7 @@ public:
 		}
 	}
 
-	TEST_METHOD(AddAScore) {
+	TEST_METHOD(AddAScoreInEmpty) {
 		unsigned int size = 15;
 		ScoreSystem highscore(size);
 		Assert::IsTrue(highscore.AddScore("pepe", 10));
@@ -27,13 +27,16 @@ public:
 		Assert::AreEqual(score._value, 10);
 	}
 
-	TEST_METHOD(AddTooLowScore) {
-		unsigned int size = 15;
+	TEST_METHOD(AddScoreInFull) {
+		unsigned int size = 3;
 		ScoreSystem highscore(size);
-		for (unsigned int i = 0; i < size; i++) {
-			Assert::IsTrue(highscore.AddScore("pepe", 10));
+		for (unsigned int i = 5; i < size + 5; i++) {
+			Assert::IsTrue(highscore.AddScore("pepe", i));
 		}
-		Assert::IsFalse(highscore.AddScore("juan", 8));
+		Assert::IsFalse(highscore.AddScore("juan", 4));
+		Assert::IsTrue(highscore.AddScore("oliver", 5));
+		Assert::IsTrue(highscore.AddScore("oscar", 6));
+		Assert::IsTrue(highscore.AddScore("ramon", 8));
 	}
 
 	};
