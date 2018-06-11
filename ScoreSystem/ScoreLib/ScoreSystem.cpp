@@ -20,11 +20,17 @@ namespace scoreSystem {
 	}
 
 	bool ScoreSystem::AddScore(std::string name, int score) {
-		int i = m_size;
-		while ((score > m_scoreArray[i - 1]._value) && i > 0) {
+		int i = m_size - 1;
+		while ((score > m_scoreArray[i]._value) && i > 0) {
 			i--;
 		}
-		return i < m_size ? true : false;
+		if (i < (m_size - 1)) {
+			m_scoreArray[i]._name = name;
+			m_scoreArray[i]._value = score;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	Score ScoreSystem::GetScore(unsigned int index) const {
