@@ -39,5 +39,24 @@ public:
 		Assert::IsTrue(highscore.AddScore("ramon", 8));
 	}
 
+	TEST_METHOD(GetSizeTest) {
+		unsigned int size = 5;
+		ScoreSystem highscore(size);
+		Assert::AreEqual(highscore.GetSize(), size);
+	}
+
+	TEST_METHOD(GetScoreTest) {
+		Score expectedScore;
+		strcpy_s(expectedScore._name, sizeof(Score::_name), "osvaldo");
+		expectedScore._value = 21;
+		unsigned int size = 3;
+		ScoreSystem highscore(size);
+		Assert::IsTrue(highscore.AddScore("oliver", 5));
+		Assert::IsTrue(highscore.AddScore("oscar", 6));
+		Assert::IsTrue(highscore.AddScore(expectedScore._name, expectedScore._value));
+		Assert::AreEqual(highscore.GetScore(0)._name, expectedScore._name);
+		Assert::AreEqual(highscore.GetScore(0)._value, expectedScore._value);
+	}
+
 	};
 }
