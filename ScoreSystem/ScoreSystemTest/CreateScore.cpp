@@ -45,7 +45,7 @@ public:
 		Assert::AreEqual(highscore.GetSize(), size);
 	}
 
-	TEST_METHOD(GetScoreTest) {
+	TEST_METHOD(GetScoreByIndexTest) {
 		Score expectedScore;
 		strcpy_s(expectedScore._name, sizeof(Score::_name), "osvaldo");
 		expectedScore._value = 21;
@@ -56,6 +56,24 @@ public:
 		Assert::IsTrue(highscore.AddScore(expectedScore._name, expectedScore._value));
 		Assert::AreEqual(highscore.GetScore(0)._name, expectedScore._name);
 		Assert::AreEqual(highscore.GetScore(0)._value, expectedScore._value);
+	}
+
+
+	TEST_METHOD(GetScoreByNameTest) {
+		unsigned int size = 4;
+		unsigned int amount;
+		Score* score;
+		ScoreSystem highscore(size);
+		for (unsigned int i = 0; i < size; i++) {
+			Assert::IsTrue(highscore.AddScore("pepe", i));
+		}
+		Assert::IsTrue(highscore.AddScore("oscar", 6));
+		score = highscore.GetScore("pepe", amount);
+		Assert::AreEqual(amount, (size - 1));
+		for (unsigned int i = 0; i < amount; i++) {
+			Assert::AreEqual(score[i]._name, "pepe");
+			Assert::AreEqual(score[i]._value, (int)(amount - i));
+		}
 	}
 
 	};

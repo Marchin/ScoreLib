@@ -16,6 +16,7 @@ namespace scoreSystem {
 		unsigned int GetSize() const;
 		bool AddScore(const char* name,const int score);
 		Score GetScore(unsigned int index) const;
+		Score* GetScore(const char* name, unsigned int& sizeReceiver) const;
 		void RemoveScore(const unsigned int index);
 	private:
 		void ShiftDownSystem(const unsigned int index, const unsigned int amount);

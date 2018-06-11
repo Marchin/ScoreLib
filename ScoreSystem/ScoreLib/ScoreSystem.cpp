@@ -39,6 +39,25 @@ namespace scoreSystem {
 		return m_scoreArray[index];
 	}
 
+	Score* ScoreSystem::GetScore(const char* name, unsigned int& sizeReceiver) const {
+		Score* checker = new Score[m_size];
+		Score* coincidences;
+		unsigned int& counter = sizeReceiver;
+		counter = 0;
+		for (unsigned int i = 0; i < m_size; i++) {
+			if (strcmp(m_scoreArray[i]._name,name) == 0) {
+				checker[counter] = m_scoreArray[i];
+				counter++;
+			}
+		}
+		coincidences = new Score[counter];
+		for (int i = 0; i < counter; i++) {
+			coincidences[i] = checker[i];
+		}
+		delete checker;
+		return coincidences;
+	}
+
 	void ScoreSystem::RemoveScore(unsigned int index) {
 		while (index < (m_size - 1)) {
 			m_scoreArray[index] = m_scoreArray[index + 1];
