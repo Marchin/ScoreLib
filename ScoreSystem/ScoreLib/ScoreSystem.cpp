@@ -5,10 +5,6 @@ namespace scoreSystem {
 	ScoreSystem::ScoreSystem(unsigned int size = 10) {
 		m_size = size;
 		m_scoreArray = new Score[m_size];
-		/*for (int i = 0; i < m_size; i++) {
-			m_scoreArray[i]._name = "(Empty)";
-			m_scoreArray[i]._value = 0;
-		}*/
 	}
 
 	ScoreSystem::~ScoreSystem() {
@@ -40,25 +36,6 @@ namespace scoreSystem {
 
 	Score ScoreSystem::GetScore(unsigned int index) const {
 		return m_scoreArray[index];
-	}
-
-	void ScoreSystem::PrintScore(const std::string& name) {
-		for (int i = 0; i <= m_size; i++) {
-			if (i == m_size) {
-				std::cout << "Name not Found" << std::endl;
-			} else if (m_scoreArray[i]._name == name) {
-				std::cout << name << ": "
-					<< m_scoreArray[i]._value << std::endl;
-				break;
-			}
-		}
-	}
-
-	void ScoreSystem::PrintScoreSystem() {
-		for (int i = 0; i < m_size; i++) {
-			std::cout << m_scoreArray[i]._name << ": "
-				<< m_scoreArray[i]._value << std::endl;
-		}
 	}
 
 	void ScoreSystem::RemoveScore(unsigned int index) {

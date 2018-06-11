@@ -16,8 +16,6 @@ namespace scoreSystem {
 		unsigned int GetSize() const;
 		bool AddScore(const char* name,const int score);
 		Score GetScore(unsigned int index) const;
-		void PrintScore(const std::string& name);
-		void PrintScoreSystem();
 		void RemoveScore(const unsigned int index);
 	private:
 		void ShiftDownSystem(const unsigned int index, const unsigned int amount);
