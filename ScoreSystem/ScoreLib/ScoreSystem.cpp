@@ -50,9 +50,13 @@ namespace scoreSystem {
 				counter++;
 			}
 		}
-		coincidences = new Score[counter];
-		for (int i = 0; i < counter; i++) {
-			coincidences[i] = checker[i];
+		if (counter == 0) {
+			coincidences = nullptr;
+		} else {
+			coincidences = new Score[counter];
+			for (int i = 0; i < counter; i++) {
+				coincidences[i] = checker[i];
+			}
 		}
 		delete checker;
 		return coincidences;

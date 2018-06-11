@@ -74,6 +74,9 @@ public:
 			Assert::AreEqual(score[i]._name, "pepe");
 			Assert::AreEqual(score[i]._value, (int)(amount - i));
 		}
+		score = highscore.GetScore("carlos", amount);
+		Assert::AreEqual(amount, (unsigned int)0);
+		Assert::IsNull(score);
 	}
 
 	};
