@@ -63,7 +63,10 @@ namespace scoreSystem {
 	}
 
 	void ScoreSystem::RemoveScore(unsigned int index) {
-		while (index < (m_size - 1)) {
+		if (index >(m_size - 1)) {
+			throw std::out_of_range("Index out of range");
+		}
+		while (index < m_size) {
 			m_scoreArray[index] = m_scoreArray[index + 1];
 			index++;
 		}

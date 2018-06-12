@@ -79,5 +79,22 @@ public:
 		Assert::IsNull(score);
 	}
 
+	TEST_METHOD(RemoveScoreTest) {
+		unsigned int size = 3;
+		ScoreSystem highscore(size);
+		Score score;
+		for (unsigned int i = 5; i < size + 5; i++) {
+			Assert::IsTrue(highscore.AddScore("pepe", i));
+		}
+		Assert::IsTrue(highscore.AddScore("oliver", 6));
+		highscore.RemoveScore(0);
+		score = highscore.GetScore(0);
+		Assert::AreEqual(score._name, "oliver");
+		Assert::AreEqual(score._value, 6);
+		score = highscore.GetScore(2);
+		Assert::AreEqual(score._name, "(Empty)");
+		Assert::AreEqual(score._value, 0);
+	}
+
 	};
 }
